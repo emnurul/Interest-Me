@@ -1,7 +1,18 @@
+
+
+
 import logo from './logo.svg';
 import './App.css';
 
+import { useEffect } from 'react';
+
 function App() {
+
+  useEffect(() => {
+    alert(`this is the key: ${process.env.REACT_APP_OPENAI_API_KEY}`)
+  }, []);
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -16,6 +27,8 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
+          jrewjroiwer
+          {process.env.REACT_APP_OPENAI_API_KEY}
         </a>
       </header>
     </div>
