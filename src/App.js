@@ -3,14 +3,53 @@
 
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+
+
 
 function App() {
 
+  const [data, setData] = useState(null);
+  const [query, setQuery] = useState("what is youre name");
+
+
   useEffect(() => {
-    alert(`this is the key: ${process.env.REACT_APP_OPENAI_API_KEY}`)
-  }, []);
+    async function sendRequest() {
+      console.log("trying")
+      try {
+        const config = {
+          method: 'POST',
+          url: 'https://api.openai.com/v1/chat/completions',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
+          },
+          data: {
+            "model": "gpt-3.5-turbo",
+            "messages": [{ "role": "user", "content": `${query}` }],
+            "temperature": 1.8
+          }
+        };
+    
+        // Send the Axios request and await the response
+        const response = await axios(config);
+
+        const answer = response.data.choices[0].message.content
+        setData(answer);
+    
+        // Handle the successful response here
+        console.log('Question:', query);
+        console.log('Response:', answer);
+      } catch (error) {
+        // Handle errors here
+        console.error('Error:', error.message);
+      }
+    }
+
+    sendRequest("what is your name?")
+  }, [query]);
 
 
   return (
@@ -29,7 +68,9 @@ function App() {
           Learn React
           jrewjroiwer
           {process.env.REACT_APP_OPENAI_API_KEY}
+          {/* {setQuery("what is your name?")} */}
         </a>
+          {data}
       </header>
     </div>
   );
