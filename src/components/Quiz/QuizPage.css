@@ -1,0 +1,79 @@
+.card {
+  /* width: 400px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.quiz{
+  align-items: center;
+}
+
+.card-image {
+  width: 150px;
+  /* Adjust the image size as needed */
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  /* For rounded images */
+}
+
+.card-content {
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.card-description {
+  font-size: 1rem;
+  color: #666;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  /* Button background color */
+  color: #fff;
+  /* Button text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Hover effect */
+.button:hover {
+  background-color: #0056b3;
+  /* Hovered button background color */
+}
+
+
+.button-back {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: darkgrey;
+  /* Button background color */
+  color: #fff;
+  /* Button text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Hover effect */
+.button-back:hover {
+  background-color: grey;
+  /* Hovered button background color */
+}
