@@ -1,17 +1,18 @@
-import React from 'react';
-import './Card.css'; // Import your CSS file
+import React from "react";
+import "./Card.css"; // Import your CSS file
 
-const Card = ({ image1, image2, title, description }) => {
+const Card = ({ image1, image2, title, secondTitle, description }) => {
   return (
     <div className="card">
-      <h2 className="card-title">{title}</h2>
       <table>
         <tr>
           <td>
-          <img src={image1} alt="Image 1" className="card-image" />
+            <h3 className="card-title">{title}</h3>
+            <img src={image1} alt="Image 1" className="card-image" />
           </td>
           <td>
-          <img src={image2} alt="Image 2" className="card-image" />
+            <h3 className="card-title">{secondTitle}</h3>
+            <img src={image2} alt="Image 2" className="card-image" />
           </td>
         </tr>
       </table>
