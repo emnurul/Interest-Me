@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import InputForm from './components/form';
+
 
 import { useState, useEffect } from 'react';
 import Button from './components/Button';
@@ -77,12 +79,8 @@ function App() {
         Question: {query} <br /><br />
         Response: {loading ? "Loading..." : data}
       </header>
-      <Button name="button name 1234" />
-      <Button name=" 1234" />
-      <Button name="butt 1234" />
-      <Button name="butt234" />
-      <Button name="button 234" />
-      <Button name="button na34" />
+     
+      <InputForm />
     </div>
   );
 }

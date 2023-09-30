@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+
+
+.bubble-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bubble {
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 5px 10px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.bubble button {
+  background-color: transparent;
+  border: none;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
