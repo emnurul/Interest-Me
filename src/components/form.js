@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function InputForm() {
   const [interests, setInterests] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
   const [learning, setLearning] = useState('');
+
+  const encodedArrayinterests = encodeURIComponent(JSON.stringify(interests));
 
 
   const handleInputChange = (e) => {
@@ -50,7 +53,10 @@ function InputForm() {
       <input onChange={e => setLearning(e.target.value)} />
       </div>
       <br></br>
-      <button>GO</button>
+
+      <button><Link to={`/card/${encodedArrayinterests}/${learning}`}>GO</Link></button>
+     
+
       <br></br>
       <br></br>
     </div>
