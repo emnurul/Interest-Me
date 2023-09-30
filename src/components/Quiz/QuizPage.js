@@ -4,24 +4,6 @@ import QCard from '../QCard/QCard';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const cardData = [
-  {
-    image: 'https://images.pexels.com/photos/5715889/pexels-photo-5715889.jpeg',
-    altText: 'Image 1',
-    question: 'What is the capital of France?',
-    choices: ['London', 'Berlin', 'Madrid', 'Paris'],
-    answer: 'Paris'
-  },
-  {
-    image: 'https://images.pexels.com/photos/5715889/pexels-photo-5715889.jpeg',
-    altText: 'Image 2',
-    question: 'What is the largest planet in our solar system?',
-    choices: ['Mars', 'Earth', 'Jupiter', 'Saturn'],
-    answer: 'Jupiter'
-  },
-  // Add more card data as needed
-];
-
 const QuizPage = (props) => {
 
   const { topic } = useParams();
@@ -34,10 +16,68 @@ const QuizPage = (props) => {
   const [chatData, setChatData] = useState([]);
   const [userAnswers, setUserAnswers] = useState({});
   const [wrongAnswers, setWrongAnswers] = useState({});
+  const [learningText, setlearningText] = useState("");
 
   const navigateToHome = () => {
-    window.location.href = '/'; // Navigate to the '/' path
+    // window.location.href = '/'; // Navigate to the '/' path
+    window.location.href = document.referrer;
   };
+
+
+  function capitalizeEachWord(input, underscore) {
+    let string = input.replace(/\b\w/g, match => match.toUpperCase());
+
+    console.log(string)
+
+    if (underscore) {
+      return string.replaceAll(" ", "_");
+    } else {
+      return string;
+    }
+  }
+
+  async function getWikiInfo() {
+    //learning 
+
+    try {
+
+      const learningCap = capitalizeEachWord(topic, true);
+      console.log(learningCap)
+
+      const config = {
+        method: "GET",
+        url: `https://en.wikipedia.org/w/api.php?action=parse&format=json&section=0&page=${learningCap}`
+      };
+
+      // Send the Axios request and await the response
+      let response = await axios(config);
+      console.log(response)
+
+      let responseText = response.data.parse.text['*'];
+      let rawString = responseText.replace(/<[^>]+>/g, '');
+
+      rawString = responseText.replace(/<[^>]+>/g, '');
+
+      // Remove CSS style declarations
+      rawString = rawString.replace(/style="[^"]*"/g, '');
+
+      // Remove JavaScript event attributes
+      rawString = rawString.replace(/on\w+="[^"]*"/g, '');
+
+      // Remove HTML entities (e.g., &nbsp;)
+      rawString = rawString.replace(/&[^;]+;/g, '');
+
+      setlearningText(rawString);
+
+      console.log("rawString")
+      console.log("rawString")
+      console.log(rawString)
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
 
   async function sendRequest() {
 
@@ -47,6 +87,24 @@ const QuizPage = (props) => {
 
     setCalled(true);
     try {
+
+      const prompt =
+        `
+              The following is an exerpt from wikipedia, take this information as FACTS.
+              ${topic}
+              ${learningText}
+
+              NOW, give me 
+
+              6 most basic level MCQ questions regarding ${topic} 
+              with 1 of 4 the options is the correct answer in JSON and ONLY JSON format like 
+              [{question: 'question', options: ['option1'], answer: 'answer'}]. One of the options 
+              MUST be the answer.`;
+
+              console.log("thjis is the promot")
+              console.log(prompt)
+
+
       const config = {
         method: 'POST',
         url: 'https://api.openai.com/v1/chat/completions',
@@ -56,7 +114,10 @@ const QuizPage = (props) => {
         },
         data: {
           "model": "gpt-3.5-turbo",
-          "messages": [{ "role": "user", "content": `6 most basic level MCQ questions regarding ${topic} with 1 of 4 the options is the correct answer in JSON and ONLY JSON format like [{question: 'question', options: ['option1'], answer: 'answer'}]. One of the options MUST be the answer.` }],
+          "messages": [{
+            "role": "user",
+            "content": prompt
+          }],
           "temperature": 0.6
         }
       };
@@ -90,7 +151,7 @@ const QuizPage = (props) => {
         // Call the images API
         const config = {
           method: 'GET',
-          url: `https://api.pexels.com/v1/search?query=${e.answer}%20${topic}&per_page=2`,
+          url: `https://api.pexels.com/v1/search?query=${e.answer}%20${topic}&per_page=1`,
           headers: {
             'Authorization': `${process.env.REACT_APP_IMAGE_KEY}`
           }
@@ -102,7 +163,7 @@ const QuizPage = (props) => {
           console.log(response);
 
           normalizedCardData.push({
-            image: response? response.data.photos[0].src.tiny:'https://images.pexels.com/photos/5715889/pexels-photo-5715889.jpeg',
+            image: response ? response.data.photos[0].src.tiny : 'https://images.pexels.com/photos/5715889/pexels-photo-5715889.jpeg',
             altText: 'Image 1',
             question: e.question,
             choices: e.options,
@@ -158,6 +219,7 @@ const QuizPage = (props) => {
   }
 
   useEffect(() => {
+    getWikiInfo();
     sendRequest()
   }, []);
 
@@ -183,7 +245,7 @@ const QuizPage = (props) => {
 
 
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <button className="button-back" onClick={navigateToHome}>Back</button> &nbsp;&nbsp;&nbsp;&nbsp;
+          <button className="button-back" onClick={navigateToHome}>Home</button> &nbsp;&nbsp;&nbsp;&nbsp;
           <button className="button" onClick={checkAnswers}>Check Answers</button>
         </div>
       </div>
