@@ -1,0 +1,19 @@
+I want to learn optometry when I am familiar with cooking, playing guitar, and programming. Give me 6 pairs of optometry terms and the terms I know with short descriptions, to let me get the basic concepts of optometry. I want you to respond in JSON format like this:
+{
+  "Cryptography": {
+    "similar_to": "Secret Recipes",
+    "Description": "Cryptography is like creating secret recipes in cooking. Instead of sharing a recipe openly, you encode it in a way that only someone with the 'secret ingredient' (the key) can decode and understand it. It's like having a secret sauce recipe that only you and a trusted friend know how to decipher."
+  },
+  "Encryption": {
+    "similar_to": "Mixing Ingredients",
+    "Description": "Encryption is akin to carefully mixing ingredients in cooking. Just as you combine ingredients in specific proportions and sequences to create a dish, encryption involves transforming plain text into an encoded form using algorithms and a secret key."
+  },
+  "Decryption": {
+    "similar_to": "Revealing the Recipe",
+    "Description": "Decryption is like revealing the hidden recipe in cooking. It's the process of taking the encoded message (the dish) and using the correct 'recipe' (the key) to make it understandable again, just as you would follow a hidden recipe to recreate a dish."
+  },
+  "Key": {
+    "similar_to": "Secret Ingredient",
+    "Description": "In cryptography, a key is like the secret ingredient in a recipe. It's a specific piece of information or code that is essential to encrypt and decrypt messages. Just as knowing the secret ingredient is crucial to make a signature dish, having the correct key is necessary to understand an encrypted message."
+  }
+}
