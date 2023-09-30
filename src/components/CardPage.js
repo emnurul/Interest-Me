@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './Card/Card';
+import { useParams } from 'react-router-dom';
 
 const dummyData = [
     {
@@ -55,7 +56,10 @@ const dummyData = [
 
 
 const CardPage = ({ data }) => {
-
+   
+    const { encodedArrayinterests } = useParams();
+    const decodedArray = JSON.parse(decodeURIComponent(encodedArrayinterests));
+    const{learning}=useParams();
     const cards = [];
 
     const itemsPerRow = 3;
@@ -96,6 +100,13 @@ const CardPage = ({ data }) => {
     return (
         <div>
             {cards}
+            <ul>
+        {decodedArray.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+
+        {learning}
+      </ul>
         </div>
     );
 };
