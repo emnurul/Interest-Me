@@ -1,0 +1,51 @@
+/* CardComponent.css (or your preferred CSS file) */
+
+/* Style the card container */
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  /* padding: 20px; */
+  /* margin: 20px; */
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  height: 300px;
+}
+
+/* Style the card image */
+.card img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Style the question */
+.question {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Style the choices */
+.choices {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.choice {
+  margin-bottom: 8px;
+}
+
+/* Style the radio buttons */
+.choice input[type="radio"] {
+  margin-right: 5px;
+}
+
+/* Style the selected choice label */
+.choice input[type="radio"]:checked + label {
+  font-weight: bold;
+  color: #007bff; /* Change to your preferred color */
+}
+
