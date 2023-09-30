@@ -33,6 +33,29 @@ const CardPage = ({ data }) => {
     }`);
   const [dummyData, setDummyData] = useState([]);
 
+  async function updateQuery(lt) {
+
+    console.log("updatig querty.......")
+    setQuery(`
+
+    The following is an exerpt from wikipedia, take this information as FACTS.
+    ${learning}
+
+    ${lt}
+
+    NOW, I want to learn ${learning} when I am familiar with ${encodedArrayinterests}. Give me 6 pairs of ${learning} terms and the terms I know with short descriptions, to let me get the basic concepts of ${learning}. I want you to respond in JSON format like this:
+    {"Cryptography": {
+        "similar_to": "Secret Recipes",
+        "Description": "Cryptography is like creating secret recipes in cooking. Instead of sharing a recipe openly, you encode it in a way that only someone with the 'secret ingredient' (the key) can decode and understand it. It's like having a secret sauce recipe that only you and a trusted friend know how to decipher."
+    },
+    "Encryption": {
+        "similar_to": "Mixing Ingredients",
+        "Description": "Encryption is akin to carefully mixing ingredients in cooking. Just as you combine ingredients in specific proportions and sequences to create a dish, encryption involves transforming plain text into an encoded form using algorithms and a secret key."
+    }
+    }`)
+    console.log("update done")
+  }
+
   const navigateToHome = () => {
     window.location.href = '/'; // Navigate to the '/' path
   };
@@ -90,6 +113,9 @@ const CardPage = ({ data }) => {
       console.log("rawString")
       console.log("rawString")
       console.log(rawString)
+      
+
+      return rawString;
 
     } catch (error) {
       console.log(error);
@@ -99,6 +125,7 @@ const CardPage = ({ data }) => {
 
   async function sendRequest() {
     try {
+
       const config = {
         method: "POST",
         url: "https://api.openai.com/v1/chat/completions",
@@ -113,6 +140,9 @@ const CardPage = ({ data }) => {
         },
       };
 
+      console.log("this was the promopt")
+
+      console.log(query)
       // Send the Axios request and await the response
       const response = await axios(config);
 
@@ -183,10 +213,23 @@ const CardPage = ({ data }) => {
     }
   }
 
+  // useEffect(() => {
+  //   //call the wiki first
+  //   getWikiInfo();
+  //   sendRequest();
+  // }, []);
   useEffect(() => {
-    //call the wiki first
-    getWikiInfo();
-    sendRequest();
+    const fetchData = async () => {
+      // Call the wiki first
+      const info = await getWikiInfo();
+
+      
+      await updateQuery(info)
+      // Now, send the request
+      sendRequest();
+    };
+
+    fetchData();
   }, []);
 
   const cards = [];

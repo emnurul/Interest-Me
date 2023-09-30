@@ -4,6 +4,7 @@ import CardPage from './components/CardPage';
 import Card from './components/Card/Card';
 import InputForm from './components/form';
 import QuizPage from './components/Quiz/QuizPage';
+import QuizPageNoP from './components/Quiz No Prompt/QuizPageNoP';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<InputForm />} />
         <Route path="/card/:encodedArrayinterests/:learning" element={<CardPage />} />
         <Route path="/quiz/:topic" element={<QuizPage />} />
+        <Route path="/quiznop/:topic" element={<QuizPageNoP />} />
       </Routes>
     </Router>
   );

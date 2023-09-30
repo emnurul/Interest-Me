@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import './QuizPage.css'; // Import your CSS file
+import './QuizPageNoP.css'; // Import your CSS file
 import QCard from '../QCard/QCard';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const QuizPage = (props) => {
+const QuizPageNoP = (props) => {
 
   const { topic } = useParams();
 
@@ -36,51 +36,7 @@ const QuizPage = (props) => {
     }
   }
 
-  async function getWikiInfo() {
-    //learning 
-
-    try {
-
-      const learningCap = capitalizeEachWord(topic, true);
-      console.log(learningCap)
-
-      const config = {
-        method: "GET",
-        url: `https://en.wikipedia.org/w/api.php?action=parse&format=json&section=0&page=${learningCap}`
-      };
-
-      // Send the Axios request and await the response
-      let response = await axios(config);
-      console.log(response)
-
-      let responseText = response.data.parse.text['*'];
-      let rawString = responseText.replace(/<[^>]+>/g, '');
-
-      rawString = responseText.replace(/<[^>]+>/g, '');
-
-      // Remove CSS style declarations
-      rawString = rawString.replace(/style="[^"]*"/g, '');
-
-      // Remove JavaScript event attributes
-      rawString = rawString.replace(/on\w+="[^"]*"/g, '');
-
-      // Remove HTML entities (e.g., &nbsp;)
-      rawString = rawString.replace(/&[^;]+;/g, '');
-
-      setlearningText(rawString);
-
-      console.log("rawString")
-      console.log("rawString")
-      console.log(rawString)
-      return rawString;
-
-    } catch (error) {
-      console.log(error);
-    }
-
-  }
-
-  async function sendRequest(learningText1) {
+  async function sendRequest() {
 
     if (called == true) {
       return;
@@ -90,12 +46,7 @@ const QuizPage = (props) => {
     try {
 
       const prompt =
-        `
-              The following is an exerpt from wikipedia, take this information as FACTS.
-              ${topic}
-              ${learningText1}
-
-              NOW, give me 
+        `     give me 
 
               6 most basic level MCQ questions regarding ${topic} 
               with 1 of 4 the options is the correct answer in JSON and ONLY JSON format like 
@@ -219,22 +170,10 @@ const QuizPage = (props) => {
     setWrongAnswers(newWrongAnswers);
   }
 
-  // useEffect(() => {
-  //   getWikiInfo();
-  //   sendRequest()
-  // }, []);
-
   useEffect(() => {
-    const fetchData = async () => {
-      // Call the wiki first
-      const lt = await getWikiInfo();
-      
-      // Now, send the request
-      sendRequest(lt);
-    };
-  
-    fetchData();
+    sendRequest()
   }, []);
+
 
 
   return (
@@ -265,4 +204,4 @@ const QuizPage = (props) => {
   );
 };
 
-export default QuizPage;
+export default QuizPageNoP;
