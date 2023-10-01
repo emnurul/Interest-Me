@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import { useState, useEffect } from "react";
+import LoadingScreen from "./Loading/Loading";
 
 const CardPage = ({ data }) => {
 
@@ -76,6 +77,9 @@ const CardPage = ({ data }) => {
       return string;
     }
   }
+  function capitalizeEachWord(input) {
+    return input.replace(/\b\w/g, match => match.toUpperCase());
+  }
 
   async function getWikiInfo() {
     //learning 
@@ -113,7 +117,7 @@ const CardPage = ({ data }) => {
       console.log("rawString")
       console.log("rawString")
       console.log(rawString)
-      
+
 
       return rawString;
 
@@ -183,8 +187,6 @@ const CardPage = ({ data }) => {
           console.log("images");
           console.log(response2);
 
-
-
           setDummyData((oldArray) => [
             ...oldArray,
             {
@@ -223,7 +225,7 @@ const CardPage = ({ data }) => {
       // Call the wiki first
       const info = await getWikiInfo();
 
-      
+
       await updateQuery(info)
       // Now, send the request
       sendRequest();
@@ -261,13 +263,15 @@ const CardPage = ({ data }) => {
     cards.push(<tr key={i}>{rowCells}</tr>);
   }
 
-  return <div>{loading ? "Loading..." :
+  return <div>{loading ?
+    <LoadingScreen />
+    :
 
     <div style={{ paddingLeft: "40px", backgroundColor: "#CCCCFF", paddingBottom: "40px" }}>
       {cards}
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <button className="button-back" onClick={navigateToHome}>Home</button> &nbsp;&nbsp;&nbsp;&nbsp;
-        <button className="button" onClick={navigateToQuiz}>Take the {learning} Quiz</button>
+        <button className="button" onClick={navigateToQuiz}>Take the {capitalizeEachWord(learning)} Quiz</button>
       </div>
 
     </div>

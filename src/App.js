@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CardPage from './components/CardPage';
 import Card from './components/Card/Card';
-import InputForm from './components/form';
+import InputForm from './components/InputForm';
 import QuizPage from './components/Quiz/QuizPage';
 import QuizPageNoP from './components/Quiz No Prompt/QuizPageNoP';
 

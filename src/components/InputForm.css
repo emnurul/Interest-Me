@@ -1,0 +1,106 @@
+.main {
+    font-size: large;
+    padding-top: 80px;
+    padding-left: 320px;
+    background-color: #01204C;
+    color: white;
+    height: 100vh;
+}
+
+.bubble-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bubble {
+    color: black;
+    background-color: #ADD8E6;
+    border: 1px solid #ADD8E6;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.bubble button {
+    background-color: transparent;
+    border: none;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+/* Apply styles to the input element */
+#myInput {
+    margin-right: 10px;
+    width: 400px;
+    /* Set the width of the input box */
+    padding: 10px;
+    /* Add some padding for better visual appearance */
+    font-size: 16px;
+    /* Set the font size */
+    border: 1px solid #ccc;
+    /* Add a border around the input */
+    border-radius: 5px;
+    /* Round the corners of the input */
+    outline: none;
+    /* Remove the default input outline on focus */
+}
+
+/* Apply styles when the input is in focus (clicked or tabbed into) */
+#myInput:focus {
+    border-color: #007bff;
+    /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    /* Add a subtle shadow on focus */
+}
+
+/* Apply styles when the input is hovered over */
+#myInput:hover {
+    border-color: #666;
+    /* Change border color on hover */
+}
+
+
+/* Apply styles to the button element */
+#myButton {
+    background-color: #007bff;
+    /* Set the background color */
+    color: #fff;
+    /* Set the text color */
+    padding: 10px 20px;
+    /* Add padding to the button */
+    font-size: 16px;
+    /* Set the font size */
+    border: none;
+    /* Remove the default button border */
+    border-radius: 5px;
+    /* Round the corners of the button */
+    cursor: pointer;
+    /* Change cursor to a pointer on hover */
+    transition: background-color 0.3s ease;
+    /* Add a smooth transition effect */
+}
+
+/* Apply styles when the button is hovered over */
+#myButton:hover {
+    background-color: #0056b3;
+    /* Change background color on hover */
+}
+
+/* Your custom styles to override the default styles */
+.custom-link {
+    text-decoration: none;
+    /* Remove the default underline */
+    color: white
+}
+
+#myButton:disabled {
+    background-color: #ccc;
+    /* Change the background color when disabled */
+    color: #666;
+    /* Change the text color when disabled */
+    cursor: not-allowed;
+    /* Change cursor style to not-allowed when disabled */
+    /* Add other custom styles as needed */
+}

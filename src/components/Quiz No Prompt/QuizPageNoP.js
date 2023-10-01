@@ -3,6 +3,7 @@ import './QuizPageNoP.css'; // Import your CSS file
 import QCard from '../QCard/QCard';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import LoadingScreen from '../Loading/Loading';
 
 const QuizPageNoP = (props) => {
 
@@ -177,7 +178,7 @@ const QuizPageNoP = (props) => {
 
 
   return (
-    loading ? <>"Loading...."</> :
+    loading ? <LoadingScreen/> :
       <div style={{ paddingLeft: '50px', backgroundColor: "#CCCCFF", height: "100vh" }}>
         <table>
           <tbody>
